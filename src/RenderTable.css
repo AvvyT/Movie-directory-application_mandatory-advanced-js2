@@ -1,0 +1,20 @@
+.myTable {
+    position: absolute;
+    top:90px;
+    margin-top: 40px;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 0 20px;
+    border: 2px;
+  }
+  
+  .control {
+    font-size: 18px;
+    margin: 12px;
+    font-weight: bold;
+    color: purple;
+    width: 70px;
+    border-radius: 7px;
+    outline: none;
+  }
