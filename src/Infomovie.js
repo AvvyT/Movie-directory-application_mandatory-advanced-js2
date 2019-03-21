@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 class Info extends Component {
@@ -19,17 +20,21 @@ class Info extends Component {
         console.log(this.props.match.params.id);
 
         return (
-            <div className=''>
-                <Helmet>
-                    <title>Info page</title>
-                </Helmet>
-                {console.log(this.state.movie)}
+            <>
                 <h2>More about {this.state.movie.title}</h2>
-                <div className='info-page'>
-                    <h2></h2>
-                    <p></p>
+                <div className='home-page'>
+                    <Helmet>
+                        <title>Info page</title>
+                    </Helmet>
+                    {console.log(this.state.movie)}
+                    <h2 className='info-text'>Intresting: {this.state.movie.description}</h2>
+                    <br></br>
+                    <p className='info-text'>Director: {this.state.movie.director}</p>
+                    <p className='info-text'>Rating: {this.state.movie.rating}</p>
+                    <br></br>
+                    <h2><Link className='info-edit' to={'/edit/' + this.state.movie.id}>Edit {this.state.movie.title}</Link></h2>
                 </div>
-            </div>
+            </>
         );
     }
 }

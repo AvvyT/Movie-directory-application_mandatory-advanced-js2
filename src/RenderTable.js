@@ -53,14 +53,14 @@ class TableRow extends Component {
         return (
             <tr key={this.props.id}>
                 <td>
-                    <Link to={'/info/' + this.props.movieId}>
+                    <Link to={'/info/' + this.props.movieId} className= 'style-title'>
                         {this.props.title}
                     </Link>
                 </td>
                 <td>{this.props.director}</td>
                 <td>{this.props.rating}</td>
                 <td value={this.props.movieId}>
-                    <Link className='control' to={'/edit/' + this.props.movieId}>edit</Link>
+                    <Link className='control edit-link' to={'/edit/' + this.props.movieId}>Edit</Link>
                     <button className='control'
                         onClick={this.handleDelete}
                         value={this.props.movieId}

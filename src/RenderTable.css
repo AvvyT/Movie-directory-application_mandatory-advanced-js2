@@ -1,5 +1,4 @@
 .myTable {
-    position: absolute;
     top:90px;
     margin-top: 40px;
     width: 100%;
@@ -7,6 +6,7 @@
     box-sizing: border-box;
     padding: 0 20px;
     border: 2px;
+    text-align: center;
   }
   
   .control {
@@ -18,3 +18,12 @@
     border-radius: 7px;
     outline: none;
   }
+
+  .style-title,
+  .edit-link {
+    font-size: 22px;
+    color: rgb(235, 181, 232);
+    font-weight: bold;
+  }
+
+  

@@ -1,24 +1,34 @@
 .home-page {
-    width: 70%;
-    min-height: 100vh;
-    background: url("/dark.jpg") no-repeat;
-    min-height: calc(100vh);
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
+  width: 70%;
+  min-height: 100vh;
+  background: url("/dark.jpg") no-repeat;
+  min-height: calc(100vh);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-bottom: 15px;
+}
 
-  .container-header {
-    position: absolute;
-    top: 0;
-  }
+.filter-input {
+  margin-bottom: 6px;
+  font-size: 20px;
+  outline: none;
+  border-radius: 3px;
+}
 
-  .filter-input {
-    margin-bottom: 6px;
-    font-size: 20px;
-    outline: none;
-    border-radius: 3px;
-  }
+.info-text {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: rgb(235, 181, 232);
+  padding: 7px;
+  margin-left: 10px;
+}
+
+.info-edit{
+  font-weight: bold;
+  font-size: 0.8em;
+  color: white;
+}
