@@ -1,29 +1,36 @@
 .myTable {
-    top:90px;
-    margin-top: 40px;
-    width: 100%;
-    min-height: 100vh;
-    box-sizing: border-box;
-    padding: 0 20px;
-    border: 2px;
-    text-align: center;
-  }
-  
-  .control {
-    font-size: 18px;
-    margin: 12px;
-    font-weight: bold;
-    color: purple;
-    width: 70px;
-    border-radius: 7px;
-    outline: none;
-  }
+  top: 90px;
+  margin-top: 40px;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 0 20px;
+  border: 2px;
+  text-align: center;
+}
 
-  .style-title,
-  .edit-link {
-    font-size: 22px;
-    color: rgb(235, 181, 232);
-    font-weight: bold;
-  }
+.control {
+  font-size: 18px;
+  margin: 12px;
+  font-weight: bold;
+  color: purple;
+  width: 70px;
+  border-radius: 7px;
+  outline: none;
+}
 
-  
+.style-title, .edit-link {
+  font-size: 22px;
+  color: rgb(235, 181, 232);
+  font-weight: bold;
+}
+
+.style-td {
+  word-break: break-all;
+}
+
+.color{
+  font-weight: bold;
+  font-size: 1em;
+  color: white;
+}

@@ -52,12 +52,12 @@ class TableRow extends Component {
     render() {
         return (
             <tr key={this.props.id}>
-                <td>
+                <td className='style-td'>
                     <Link to={'/info/' + this.props.movieId} className= 'style-title'>
                         {this.props.title}
                     </Link>
                 </td>
-                <td>{this.props.director}</td>
+                <td className='style-td color'>{this.props.director}</td>
                 <td>{this.props.rating}</td>
                 <td value={this.props.movieId}>
                     <Link className='control edit-link' to={'/edit/' + this.props.movieId}>Edit</Link>

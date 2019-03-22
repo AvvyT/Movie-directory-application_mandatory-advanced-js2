@@ -1,0 +1,36 @@
+.add-input {
+    margin-bottom: 30px;
+}
+
+.add-input {
+    margin-bottom: 6px;
+    font-size: 20px;
+    outline: none;
+    border: 2px solid rgb(235, 181, 232);
+    border-radius: 3px;
+}
+
+.text-area {
+    width: 300px;
+    height: 90px;
+    border-radius: 10px;
+    border: 2px solid rgb(235, 181, 232);
+    outline: none;
+    padding: 3px;
+    font-size: 20px;
+    resize: none;
+}
+
+.error-text {
+    color: red;
+}
+
+.myError {
+    background: none;
+    color: red;
+    font-weight: bold;
+    border-radius: 50%;
+    border-color: rgb(235, 181, 232);
+    font-size: 1em;
+    margin-left: 5px;
+}
