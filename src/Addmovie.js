@@ -43,7 +43,7 @@ class Add extends Component {
     }
 
     handleSubmit(e) {
-        alert('A title was submitted: ' + this.state.title);
+        //alert('A title was submitted: ' + this.state.title);
         e.preventDefault();
 
         if (!this.state.title || !this.state.director ||
@@ -58,9 +58,6 @@ class Add extends Component {
         add.director = this.state.director
         add.rating = this.state.rating
         console.log(add); // lägg det nya innehåll
-
-        let stringified = JSON.stringify(add);
-        console.log(stringified); // tolka add till JSON
 
         axios.post("http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/", add)
             .then((response) => {
@@ -111,9 +108,11 @@ class Add extends Component {
                         <label className='info-text'>Rating: <input
                             className="rating"
                             type="range"
+                            value={this.state.rating}
                             min={0} max={5}
                             step="0.1"
                             onChange={this.handleRatingChange} required />
+                            {this.state.rating}/5
                         </label><br /><br />
                         <input className="control"
                             type="submit"

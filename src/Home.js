@@ -24,7 +24,7 @@ class Homepage extends Component {
     deleteMovie(id) {
         Axios.delete("http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/" + id)
             .then((respons) => {
-                console.log(respons); // får ett tomt respons
+                //console.log(respons); // får ett tomt respons
                 this.setState({ movies: this.state.movies.filter(movie => id !== movie.id) })
                 console.log(this.state.movies); // får det nuvarande movies
             })
