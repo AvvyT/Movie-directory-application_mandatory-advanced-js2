@@ -9,37 +9,43 @@ class Edit extends Component {
         super(props);
 
         this.state = {
-            editmovie: {}, edit: '', complete: false, create: false, title: '', description: '',
-            director: '',
-            rating: 0
+            hasChanges: false, updated: false, title: '', description: '', director: '',
+            rating: 0, error: ''
         };
-        
+
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleDirectorChange = this.handleDirectorChange.bind(this);
         this.handleDecripChange = this.handleDecripChange.bind(this);
         this.handleRatingChange = this.handleRatingChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.dismissError = this.dismissError.bind(this);
+    }
+
+    dismissError() {
+        this.setState({ error: '' });
     }
 
     handleTitleChange(e) {
-        this.setState({ title: e.target.value });
+        this.setState({ title: e.target.value, hasChanges: true });
     }
 
     handleDirectorChange(e) {
-        this.setState({ director: e.target.value });
+        this.setState({ director: e.target.value, hasChanges: true });
     }
 
     handleDecripChange(e) {
-        this.setState({ description: e.target.value });
+        this.setState({ description: e.target.value, hasChanges: true });
     }
 
     handleRatingChange(e) {
-        this.setState({ rating: e.target.value });
+        this.setState({ rating: e.target.value, hasChanges: true });
     }
 
     handleSubmit(e) {
-        //alert('A title was submitted: ' + this.state.title);
         e.preventDefault();
+        if (!this.state.hasChanges) {
+            return this.setState({ error: ' No changes to submit!' });
+        }
 
         let edit = {};
 
@@ -47,35 +53,47 @@ class Edit extends Component {
         edit.description = this.state.description
         edit.director = this.state.director
         edit.rating = this.state.rating
-        console.log(edit); // lägg det nya innehåll
+        console.log(edit); // se det nya innehåll
 
+        // ----skicka det nya ändrat innehåll
         axios.put(`http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/${this.props.match.params.id}`,
             edit, { headers: { "Content-Type": "application/json" } }) // -----
             .then((respons) => {
                 console.log(respons); // visa nya data
-                this.setState({ create: true })
+                this.setState({ updated: true })
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
+    // ----hämta o ändra innehåll request
     componentDidMount() {
-        axios.get(`http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/${this.props.match.params.id}`)
+        this.source = axios.CancelToken.source();
+
+        axios.get(`http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/${this.props.match.params.id}`, { cancelToken: this.source.token })
             .then((response) => {
                 console.log(response.data);
                 this.setState({
-                    editmovie: response, complete: true,
                     title: response.data.title,
                     description: response.data.description,
                     director: response.data.director,
                     rating: response.data.rating
                 })
             })
+            .catch(error => {
+                if(axios.isCancel(error)){
+                    console.log("Request canceled", error.message);
+                }
+            });
+    }
+
+    componentWillUnmount(){
+        this.source.cancel("Operation canceled by the user.");
     }
 
     render() {
-        if (this.state.create) {
+        if (this.state.updated) {
             return <Redirect to="/"></Redirect>
         }
         //console.log(this.props.match.params.id);
@@ -104,6 +122,7 @@ class Edit extends Component {
                             maxLength={300}
                             name="description"
                             className='text-area'
+                            type="text"
                             value={this.state.description}
                             onChange={this.handleDecripChange} />
                         </label><br /><br /><br />
@@ -130,6 +149,11 @@ class Edit extends Component {
                             type="submit"
                             value="Save"
                             onChange={this.handleSubmit} />
+                        {
+                            this.state.error && <h3 className='error-text' onClick={this.dismissError}>
+                                {this.state.error}
+                                <button className="myError" onClick={this.dismissError}>✖</button></h3>
+                        }
                     </form>
                 </div>
             </>

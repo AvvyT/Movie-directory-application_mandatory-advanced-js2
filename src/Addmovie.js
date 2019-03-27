@@ -10,7 +10,7 @@ class Add extends Component {
 
         this.state = {
             error: '',
-            title: '', director: '', description: '', rating: 1,
+            title: '', director: '', description: '', rating: 0,
             complete: false
         };
 
@@ -94,6 +94,7 @@ class Add extends Component {
                             maxLength={300}
                             name="description"
                             className='text-area'
+                            type="text"
                             onChange={this.handleDecripChange} />
                         </label><br /><br /><br />
                         <label className='info-text'>Director: <input

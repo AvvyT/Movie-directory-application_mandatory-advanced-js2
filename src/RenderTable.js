@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './RenderTable.css';
-//import ScrollToBottom from "react-scroll-to-bottom";
 
 
 class RenderThead extends Component {
@@ -53,14 +52,16 @@ class TableRow extends Component {
         return (
             <tr key={this.props.id}>
                 <td className='style-td'>
-                    <Link to={'/info/' + this.props.movieId} className= 'style-title'>
+                    <Link to={'/info/' + this.props.movieId} 
+                    className= 'style-title'>
                         {this.props.title}
                     </Link>
                 </td>
                 <td className='style-td color'>{this.props.director}</td>
                 <td>{this.props.rating}</td>
                 <td value={this.props.movieId}>
-                    <Link className='control edit-link' to={'/edit/' + this.props.movieId}>Edit</Link>
+                    <Link className='control edit-link' 
+                    to={'/edit/' + this.props.movieId}>Edit</Link>
                     <button className='control'
                         onClick={this.handleDelete}
                         value={this.props.movieId}
@@ -76,7 +77,9 @@ class RenderTable extends Component {
     render() {
         return (
             <>
-                <RenderThead delete={this.props.delete} movies={this.props.movies} />
+                <RenderThead 
+                delete={this.props.delete} 
+                movies={this.props.movies} />
             </>
         );
     }

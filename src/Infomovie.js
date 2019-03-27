@@ -10,14 +10,27 @@ class Info extends Component {
         this.state = { movie: [] };
     }
 
-    componentWillMount() {
-        axios.get(`http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/${this.props.match.params.id}`)
-            .then(response => this.setState({ movie: response.data }));
-        //console.log(response.data);
+    componentDidMount() {
+        // ladda inte onödig om snabbt startas ny sida efter
+        this.source = axios.CancelToken.source();
+
+        axios.get(`http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/${this.props.match.params.id}`, { cancelToken: this.source.token })
+            .then(response => this.setState({ movie: response.data }))
+            //console.log(response.data);
+            .catch(error => {
+                // fel meddelande
+                if (axios.isCancel(error)) {
+                    console.log("Request canceled", error.message);
+                }
+            });
+    }
+
+    componentWillUnmount() {
+        this.source.cancel("Operation canceled by the user.");
     }
 
     render() {
-        console.log(this.props.match.params.id);
+        //console.log(this.props.match.params.id);
 
         return (
             <>

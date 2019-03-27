@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-
-import './Home.css';
-import Axios from 'axios';
 import RenderTable from './RenderTable';
+import './Home.css';
+import axios from 'axios';
 
 class Homepage extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { movies: [] }
-        this.deleteMovie = this.deleteMovie.bind(this);
+        this.state = { movies: [], filter: '' }
 
-        Axios.get('http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies')
+        this.deleteMovie = this.deleteMovie.bind(this);
+        this.changeInput = this.changeInput.bind(this);
+
+        axios.get('http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies')
             .then((response) => {
                 this.setState({ movies: response.data });
                 console.log(this.state.movies);
@@ -21,9 +22,13 @@ class Homepage extends Component {
             });
     }
 
+    changeInput(e) {
+        this.setState({ filter: e.target.value });
+    }
+
     deleteMovie(id) {
-        Axios.delete("http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/" + id)
-            .then((respons) => {
+        axios.delete("http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies/" + id)
+            .then(() => {
                 //console.log(respons); // får ett tomt respons
                 this.setState({ movies: this.state.movies.filter(movie => id !== movie.id) })
                 console.log(this.state.movies); // får det nuvarande movies
@@ -31,6 +36,12 @@ class Homepage extends Component {
     }
 
     render() {
+        const { movies, filter } = this.state;
+
+        let filtrerad = movies.filter(movie =>
+            movie.title.toLowerCase().includes(filter.toLowerCase()) ||
+            movie.director.toLowerCase().includes(filter.toLowerCase()));
+
         return (
             <div className='home-page'>
                 <header className='container-header'>
@@ -38,9 +49,10 @@ class Homepage extends Component {
                     <input
                         className='filter-input'
                         placeholder='filtrera'
+                        onChange={this.changeInput}
                     />
                 </header>
-                <RenderTable delete={this.deleteMovie} movies={this.state.movies}></RenderTable>
+                <RenderTable delete={this.deleteMovie} movies={filtrerad}></RenderTable>
             </div >
         );
     }
