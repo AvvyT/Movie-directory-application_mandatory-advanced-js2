@@ -64,6 +64,9 @@ class Add extends Component {
                 console.log(response); // se nya datan!
                 this.setState({ complete: true })
             })
+            .catch(() => {
+                this.setState({ error: "An error has occurred" });
+            })
     }
 
     render() {

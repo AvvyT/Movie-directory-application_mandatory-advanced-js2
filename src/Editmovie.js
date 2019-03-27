@@ -62,8 +62,8 @@ class Edit extends Component {
                 console.log(respons); // visa nya data
                 this.setState({ updated: true })
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                this.setState({ error: "An error has occurred" });
             })
     }
 
@@ -82,13 +82,13 @@ class Edit extends Component {
                 })
             })
             .catch(error => {
-                if(axios.isCancel(error)){
+                if (axios.isCancel(error)) {
                     console.log("Request canceled", error.message);
                 }
             });
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.source.cancel("Operation canceled by the user.");
     }
 
